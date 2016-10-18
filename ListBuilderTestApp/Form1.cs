@@ -25,7 +25,7 @@ namespace ListBuilderTestApp
             listBuilder1.FilterBy = "Name";
             listBuilder1.KeyProperty = "Id";
             listBuilder1.SearchText = "Search by name";
-            listBuilder1.HideFirstProperty = true;
+            listBuilder1.PropertiesToHide = new string[] { "Id", "DiscoveredDate" };
             listBuilder1.SelectedKeys = new string[] { "1", "3" };
         }
 

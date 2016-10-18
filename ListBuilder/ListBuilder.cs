@@ -14,13 +14,18 @@ namespace ListBuilder
     {
         private DataTable dataTable;        
 
-        private bool hideFirstProperty;
-
-        public bool HideFirstProperty
+        public IEnumerable<string> PropertiesToHide
         {
             set
-            {
-                hideFirstProperty = value;
+            {                
+                // Hide columns
+                if (value.Count() > 0)
+                {
+                    foreach (string property in value)
+                    {
+                        dgvItems.Columns[property].Visible = false;
+                    }
+                }
             }
         }
 
@@ -100,12 +105,6 @@ namespace ListBuilder
                 {
                     dgvItems.Columns[i].ReadOnly = true;
                 }
-
-                if (hideFirstProperty)
-                {
-                    // Hide first property
-                    dgvItems.Columns[1].Visible = false;
-                }                
             }
         }
 
