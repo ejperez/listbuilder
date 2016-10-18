@@ -22,6 +22,8 @@ namespace ListBuilderTestApp
             dictionary.Add("3", new Animal() { Id = 3, Name = "Eagle", Type = "Bird" });
 
             listBuilder1.DictionaryItems = dictionary;
+            listBuilder1.DictionaryItems = null;
+            listBuilder1.DictionaryItems = dictionary;
             listBuilder1.FilterBy = "Name";
             listBuilder1.KeyProperty = "Id";
             listBuilder1.SearchText = "Search by name";

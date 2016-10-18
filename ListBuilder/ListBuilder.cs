@@ -76,9 +76,12 @@ namespace ListBuilder
             set
             {
                 if (value == null || value.Count == 0)
-                    return;
+                    dgvItems.Rows.Clear();
 
                 dictionaryItems = value;
+
+                // Create new
+                dataTable = new DataTable();
 
                 // Add checbox column
                 dataTable.Columns.Add("Selected", typeof(bool));
@@ -124,10 +127,7 @@ namespace ListBuilder
 
         public ListBuilder()
         {
-            InitializeComponent();
-
-            dictionaryItems = new Dictionary<string, object>();
-            dataTable = new DataTable();
+            InitializeComponent();     
         }
 
         private void txtItemsFilter_TextChanged(object sender, EventArgs e)
