@@ -12,12 +12,12 @@ namespace ListBuilder
 {
     public partial class ListBuilder : UserControl
     {
-        private DataTable dataTable;        
+        private DataTable dataTable;
 
         public IEnumerable<string> PropertiesToHide
         {
             set
-            {                
+            {
                 // Hide columns
                 if (value.Count() > 0)
                 {
@@ -138,33 +138,40 @@ namespace ListBuilder
             }
         }
 
+        // Show selected
         private void button3_Click(object sender, EventArgs e)
         {
             dataTable.DefaultView.RowFilter = string.Format("Selected = True");
-            txtItemsFilter.Clear();
         }
 
+        // Show all
         private void button4_Click(object sender, EventArgs e)
         {
             dataTable.DefaultView.RowFilter = string.Empty;
             txtItemsFilter.Clear();
         }
 
+        // Select all visible in list
         private void button1_Click(object sender, EventArgs e)
         {
             foreach (DataRow row in dataTable.Rows)
             {
-                row["Selected"] = true;
+                if (((string)row[filterBy]).ToUpper().Contains(txtItemsFilter.Text.ToUpper()))
+                    row["Selected"] = true;
             }
+
             UpdateSelectedCountLabel();
         }
 
+        // Deselect all visible in list
         private void button2_Click(object sender, EventArgs e)
         {
             foreach (DataRow row in dataTable.Rows)
             {
-                row["Selected"] = false;
+                if (((string)row[filterBy]).ToUpper().Contains(txtItemsFilter.Text.ToUpper()))
+                    row["Selected"] = false;
             }
+
             UpdateSelectedCountLabel();
         }
 
