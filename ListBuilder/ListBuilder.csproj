@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ListBuilder.cs">
-      <SubType>Component</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ListBuilder.Designer.cs">
       <DependentUpon>ListBuilder.cs</DependentUpon>

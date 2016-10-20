@@ -19,7 +19,7 @@ namespace ListBuilder
             set
             {
                 // Hide columns
-                if (value.Count() > 0)
+                if (dgvItems.Columns.Count > 0 && value.Count() > 0)
                 {
                     foreach (string property in value)
                     {
@@ -55,7 +55,7 @@ namespace ListBuilder
         {
             set
             {
-                if (dictionaryItems.Count() == 0 || value == null || value.Count() == 0)
+                if (dictionaryItems == null || dictionaryItems.Count() == 0 || value == null || value.Count() == 0)
                     return;
 
                 foreach (DataRow row in dataTable.Rows)
@@ -65,6 +65,8 @@ namespace ListBuilder
                         row["Selected"] = true;
                     }
                 }
+
+                UpdateSelectedCountLabel();
             }
         }
 
@@ -76,7 +78,16 @@ namespace ListBuilder
             set
             {
                 if (value == null || value.Count == 0)
-                    dgvItems.Rows.Clear();
+                {
+                    if (dataTable != null)
+                        dataTable.Clear();
+
+                    dgvItems.DataSource = null;
+
+                    UpdateSelectedCountLabel();
+
+                    return;
+                }
 
                 dictionaryItems = value;
 
@@ -115,24 +126,30 @@ namespace ListBuilder
         {
             get
             {
+                if (dataTable == null)
+                    return null;
+
+                var list = new List<object>();
                 foreach (DataRow row in dataTable.Rows)
                 {
                     if ((bool)row["Selected"])
                     {
-                        yield return dictionaryItems[(string)row[keyProperty]];
+                        list.Add(dictionaryItems[(string)row[keyProperty]]);
                     }
                 }
+
+                return list;
             }
         }
 
         public ListBuilder()
         {
-            InitializeComponent();     
+            InitializeComponent();
         }
 
         private void txtItemsFilter_TextChanged(object sender, EventArgs e)
         {
-            if (filterBy != null)
+            if (dataTable != null && filterBy != null)
             {
                 dataTable.DefaultView.RowFilter = string.Format("[{0}] LIKE '%{1}%'", filterBy, txtItemsFilter.Text);
             }
@@ -141,63 +158,81 @@ namespace ListBuilder
         // Show selected
         private void button3_Click(object sender, EventArgs e)
         {
-            dataTable.DefaultView.RowFilter = string.Format("Selected = True");
+            if (dataTable != null)
+                dataTable.DefaultView.RowFilter = string.Format("Selected = True");
+            txtItemsFilter.Clear();
         }
 
         // Show all
         private void button4_Click(object sender, EventArgs e)
         {
-            dataTable.DefaultView.RowFilter = string.Empty;
+            if (dataTable != null)
+                dataTable.DefaultView.RowFilter = string.Empty;
             txtItemsFilter.Clear();
         }
 
         // Select all visible in list
         private void button1_Click(object sender, EventArgs e)
         {
-            foreach (DataRow row in dataTable.Rows)
-            {
-                if (((string)row[filterBy]).ToUpper().Contains(txtItemsFilter.Text.ToUpper()))
-                    row["Selected"] = true;
-            }
+            if (dataTable != null)
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    if (((string)row[filterBy]).ToUpper().Contains(txtItemsFilter.Text.ToUpper()))
+                        row["Selected"] = true;
+                }
 
             UpdateSelectedCountLabel();
+            if (SelectionChanged != null)
+                SelectionChanged(null, null);
         }
 
         // Deselect all visible in list
         private void button2_Click(object sender, EventArgs e)
         {
-            foreach (DataRow row in dataTable.Rows)
-            {
-                if (((string)row[filterBy]).ToUpper().Contains(txtItemsFilter.Text.ToUpper()))
-                    row["Selected"] = false;
-            }
+            if (dataTable != null)
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    if (((string)row[filterBy]).ToUpper().Contains(txtItemsFilter.Text.ToUpper()))
+                        row["Selected"] = false;
+                }
 
             UpdateSelectedCountLabel();
+            if (SelectionChanged != null)
+                SelectionChanged(null, null);
         }
 
         private void UpdateSelectedCountLabel()
         {
             int count = 0;
 
-            foreach (DataRow row in dataTable.Rows)
+            if (dataTable != null)
             {
-                if ((bool)row["Selected"])
-                    count++;
-            }
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    if ((bool)row["Selected"])
+                        count++;
+                }
 
-            if (count == 0)
-            {
-                lblSelectedCount.Text = "Nothing selected";
-            }
-            else
-            {
-                lblSelectedCount.Text = string.Format("{0} item(s) selected", count);
+                if (count == 0)
+                {
+                    lblSelectedCount.Text = "Nothing selected";
+                }
+                else
+                {
+                    lblSelectedCount.Text = string.Format("{0} item(s) selected", count);
+                }
+
+                lblSelectedCount.Text += string.Format(" out of {0}", dataTable.Rows.Count);
             }
         }
 
         private void dgvItems_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             UpdateSelectedCountLabel();
+            if (SelectionChanged != null)
+                SelectionChanged(null, null);
         }
+
+        public event EventHandler SelectionChanged;
     }
 }

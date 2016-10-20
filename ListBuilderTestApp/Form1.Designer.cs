@@ -28,41 +28,48 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.wizardControl1 = new AeroWizard.WizardControl();
-            this.wizardPage1 = new AeroWizard.WizardPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.listBuilder1 = new ListBuilder.ListBuilder();
-            ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).BeginInit();
-            this.wizardPage1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // wizardControl1
+            // button1
             // 
-            this.wizardControl1.BackColor = System.Drawing.Color.White;
-            this.wizardControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wizardControl1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.wizardControl1.Location = new System.Drawing.Point(0, 0);
-            this.wizardControl1.Name = "wizardControl1";
-            this.wizardControl1.Pages.Add(this.wizardPage1);
-            this.wizardControl1.Size = new System.Drawing.Size(622, 425);
-            this.wizardControl1.TabIndex = 0;
-            this.wizardControl1.Text = "Wizard Title";
+            this.button1.Location = new System.Drawing.Point(105, 323);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // wizardPage1
+            // button2
             // 
-            this.wizardPage1.Controls.Add(this.listBuilder1);
-            this.wizardPage1.Name = "wizardPage1";
-            this.wizardPage1.Size = new System.Drawing.Size(575, 271);
-            this.wizardPage1.TabIndex = 0;
-            this.wizardPage1.Text = "Page Title";
+            this.button2.Location = new System.Drawing.Point(186, 323);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 2;
+            this.button2.Text = "2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(501, 366);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 3;
+            this.button3.Text = "Check";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // listBuilder1
             // 
-            this.listBuilder1.DictionaryItems = ((System.Collections.Generic.Dictionary<string, object>)(resources.GetObject("listBuilder1.DictionaryItems")));
-            this.listBuilder1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBuilder1.Location = new System.Drawing.Point(0, 0);
+            this.listBuilder1.DictionaryItems = null;
+            this.listBuilder1.Location = new System.Drawing.Point(21, 26);
             this.listBuilder1.Name = "listBuilder1";
-            this.listBuilder1.Size = new System.Drawing.Size(575, 271);
+            this.listBuilder1.Size = new System.Drawing.Size(516, 320);
             this.listBuilder1.TabIndex = 0;
             // 
             // Form1
@@ -70,20 +77,23 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(622, 425);
-            this.Controls.Add(this.wizardControl1);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.listBuilder1);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.wizardControl1)).EndInit();
-            this.wizardPage1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private AeroWizard.WizardControl wizardControl1;
-        private AeroWizard.WizardPage wizardPage1;
         private ListBuilder.ListBuilder listBuilder1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+
 
 
     }
