@@ -52,7 +52,7 @@ namespace ListBuilderTestApp
         }
 
         private void button2_Click(object sender, EventArgs e)
-        {            
+        {
             dictionarySelected["1"] = listBuilder1.SelectedItems.Select(a => (Animal)a).ToList();
 
             listBuilder1.DictionaryItems = dictionary["2"].ToDictionary(a => a.Name, a => (object)a);

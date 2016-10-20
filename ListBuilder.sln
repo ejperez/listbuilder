@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListBuilder", "ListBuilder\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListBuilderTestApp", "ListBuilderTestApp\ListBuilderTestApp.csproj", "{FC612DD4-2DFE-4E36-BC46-69D33941DF3D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvanceListView", "AdvanceListView\AdvanceListView.csproj", "{1D976CA5-5A28-4C4A-AA03-52F0D7BAEABD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvanceListViewTestApp", "AdvanceListViewTestApp\AdvanceListViewTestApp.csproj", "{482A477A-E788-41B4-95D4-7935DBDEBFBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{FC612DD4-2DFE-4E36-BC46-69D33941DF3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC612DD4-2DFE-4E36-BC46-69D33941DF3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC612DD4-2DFE-4E36-BC46-69D33941DF3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D976CA5-5A28-4C4A-AA03-52F0D7BAEABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D976CA5-5A28-4C4A-AA03-52F0D7BAEABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D976CA5-5A28-4C4A-AA03-52F0D7BAEABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D976CA5-5A28-4C4A-AA03-52F0D7BAEABD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{482A477A-E788-41B4-95D4-7935DBDEBFBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{482A477A-E788-41B4-95D4-7935DBDEBFBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{482A477A-E788-41B4-95D4-7935DBDEBFBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{482A477A-E788-41B4-95D4-7935DBDEBFBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
