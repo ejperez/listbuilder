@@ -29,19 +29,17 @@ namespace ListBuilder
             }
         }
 
-        public string SearchText
+        private IEnumerable<string> propertiesForFiltering;
+
+        public IEnumerable<string> PropertiesForFiltering
         {
             set
             {
-                lblSearch.Text = value;
+                propertiesForFiltering = value;
+
+                if (dataTable != null)
+                    dataTable.DefaultView.RowFilter = string.Empty;
             }
-        }
-
-        private string filterBy;
-
-        public string FilterBy
-        {
-            set { filterBy = value; }
         }
 
         private string keyProperty;
@@ -98,10 +96,15 @@ namespace ListBuilder
                 dataTable.Columns.Add("Selected", typeof(bool));
 
                 // Add columns
+                List<string> columns = new List<string>();
                 foreach (var item in dictionaryItems.First().Value.GetType().GetProperties())
                 {
                     dataTable.Columns.Add(item.Name, typeof(string));
+                    columns.Add(item.Name);
                 }
+
+                // Default properties for filtering are all columns
+                PropertiesForFiltering = columns;
 
                 // Add rows
                 foreach (var item in dictionaryItems)
@@ -149,9 +152,25 @@ namespace ListBuilder
 
         private void txtItemsFilter_TextChanged(object sender, EventArgs e)
         {
-            if (dataTable != null && filterBy != null)
+            if (dataTable.Rows.Count > 0 && propertiesForFiltering.Count() > 0)
             {
-                dataTable.DefaultView.RowFilter = string.Format("[{0}] LIKE '%{1}%'", filterBy, txtItemsFilter.Text);
+                var properties = propertiesForFiltering.ToArray();
+                string filter = string.Empty;
+
+                for (int i = 0; i < properties.Length; i++)
+                {
+                    if (i == 0)
+                    {
+                        filter += string.Format("[{0}] LIKE '%{1}%'", properties[i], txtFilter.Text);
+                    }
+                    else
+                    {
+                        filter += string.Format(" OR [{0}] LIKE '%{1}%'", properties[i], txtFilter.Text);
+                    }
+
+                }
+
+                dataTable.DefaultView.RowFilter = filter;
             }
         }
 
@@ -160,7 +179,7 @@ namespace ListBuilder
         {
             if (dataTable != null)
                 dataTable.DefaultView.RowFilter = string.Format("Selected = True");
-            txtItemsFilter.Clear();
+            txtFilter.Clear();
         }
 
         // Show all
@@ -168,20 +187,35 @@ namespace ListBuilder
         {
             if (dataTable != null)
                 dataTable.DefaultView.RowFilter = string.Empty;
-            txtItemsFilter.Clear();
+            txtFilter.Clear();
         }
 
         // Select all visible in list
         private void button1_Click(object sender, EventArgs e)
         {
             if (dataTable != null)
-                foreach (DataRow row in dataTable.Rows)
+            {
+                // Get filtered ids
+                List<string> selectedIds = new List<string>();
+                var dt = dataTable.DefaultView.ToTable();
+
+                foreach (DataRow row in dt.Rows)
                 {
-                    if (((string)row[filterBy]).ToUpper().Contains(txtItemsFilter.Text.ToUpper()))
-                        row["Selected"] = true;
+                    selectedIds.Add((string)row[keyProperty]);
                 }
 
+                // Select filtered ids
+                for (int i = 0; i < dgvItems.Rows.Count; i++)
+                {
+                    if (selectedIds.Contains((string)dgvItems.Rows[i].Cells[keyProperty].Value))
+                    {
+                        dgvItems.Rows[i].Cells["Selected"].Value = true;
+                    }
+                }
+            }
+
             UpdateSelectedCountLabel();
+
             if (SelectionChanged != null)
                 SelectionChanged(null, null);
         }
@@ -190,13 +224,28 @@ namespace ListBuilder
         private void button2_Click(object sender, EventArgs e)
         {
             if (dataTable != null)
-                foreach (DataRow row in dataTable.Rows)
+            {
+                // Get filtered ids
+                List<string> selectedIds = new List<string>();
+                var dt = dataTable.DefaultView.ToTable();
+
+                foreach (DataRow row in dt.Rows)
                 {
-                    if (((string)row[filterBy]).ToUpper().Contains(txtItemsFilter.Text.ToUpper()))
-                        row["Selected"] = false;
+                    selectedIds.Add((string)row[keyProperty]);
                 }
 
+                // Select filtered ids
+                for (int i = 0; i < dgvItems.Rows.Count; i++)
+                {
+                    if (selectedIds.Contains((string)dgvItems.Rows[i].Cells[keyProperty].Value))
+                    {
+                        dgvItems.Rows[i].Cells["Selected"].Value = false;
+                    }
+                }
+            }
+
             UpdateSelectedCountLabel();
+
             if (SelectionChanged != null)
                 SelectionChanged(null, null);
         }

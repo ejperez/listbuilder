@@ -27,9 +27,7 @@ namespace ListBuilderTestApp
 
             listBuilder1.DictionaryItems = dictionary["1"].ToDictionary(a => a.Id.ToString(), a => (object)a);
             listBuilder1.SelectionChanged += listBuilder1_SelectionChanged;
-            listBuilder1.FilterBy = "Name";
             listBuilder1.KeyProperty = "Id";
-            listBuilder1.SearchText = "Search by name";
             listBuilder1.PropertiesToHide = new string[] { "Id", "DiscoveredDate" };
             listBuilder1.SelectedKeys = new string[] { "1", "3" };
         }

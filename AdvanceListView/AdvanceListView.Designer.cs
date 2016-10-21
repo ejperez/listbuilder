@@ -28,35 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbFilterBy = new System.Windows.Forms.ComboBox();
             this.txtFilter = new System.Windows.Forms.TextBox();
             this.dgvItems = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
             this.lblCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(63, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Filter by";
-            // 
-            // cbFilterBy
-            // 
-            this.cbFilterBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbFilterBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFilterBy.FormattingEnabled = true;
-            this.cbFilterBy.Location = new System.Drawing.Point(112, 12);
-            this.cbFilterBy.Name = "cbFilterBy";
-            this.cbFilterBy.Size = new System.Drawing.Size(131, 21);
-            this.cbFilterBy.TabIndex = 1;
-            this.cbFilterBy.SelectedIndexChanged += new System.EventHandler(this.cbFilterBy_SelectedIndexChanged);
             // 
             // txtFilter
             // 
@@ -116,8 +93,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dgvItems);
             this.Controls.Add(this.txtFilter);
-            this.Controls.Add(this.cbFilterBy);
-            this.Controls.Add(this.label1);
             this.Name = "AdvanceListView";
             this.Size = new System.Drawing.Size(534, 358);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
@@ -128,8 +103,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cbFilterBy;
         private System.Windows.Forms.TextBox txtFilter;
         private System.Windows.Forms.DataGridView dgvItems;
         private System.Windows.Forms.Label label4;

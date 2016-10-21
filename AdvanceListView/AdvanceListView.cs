@@ -37,13 +37,16 @@ namespace AdvanceListView
             }
         }
 
+        private IEnumerable<string> propertiesForFiltering;
+
         public IEnumerable<string> PropertiesForFiltering
         {
             set
             {
-                cbFilterBy.Items.Clear();
-                cbFilterBy.Items.AddRange(value.ToArray());
-                cbFilterBy.SelectedItem = value.First();
+                propertiesForFiltering = value;
+
+                if (dataTable != null)
+                    dataTable.DefaultView.RowFilter = string.Empty;
             }
         }
 
@@ -133,9 +136,25 @@ namespace AdvanceListView
 
         private void txtFilter_TextChanged(object sender, EventArgs e)
         {
-            if (dataTable.Rows.Count > 0 && cbFilterBy.SelectedItem != null)
+            if (dataTable.Rows.Count > 0 && propertiesForFiltering.Count() > 0)
             {
-                dataTable.DefaultView.RowFilter = string.Format("[{0}] LIKE '%{1}%'", cbFilterBy.SelectedItem, txtFilter.Text);
+                var properties = propertiesForFiltering.ToArray();
+                string filter = string.Empty;
+
+                for (int i = 0; i < properties.Length; i++)
+                {
+                    if (i == 0)
+                    {
+                        filter += string.Format("[{0}] LIKE '%{1}%'", properties[i], txtFilter.Text);
+                    }
+                    else
+                    {
+                        filter += string.Format(" OR [{0}] LIKE '%{1}%'", properties[i], txtFilter.Text);
+                    }
+
+                }
+
+                dataTable.DefaultView.RowFilter = filter;
             }
         }
 

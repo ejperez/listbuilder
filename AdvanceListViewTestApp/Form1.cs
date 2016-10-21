@@ -27,7 +27,7 @@ namespace AdvanceListViewTestApp
             };
 
             advanceListView1.DictionaryItems = animals.ToDictionary(a => a.Id.ToString(), a => (object)a);
-            //advanceListView1.PropertiesForFiltering = new string[] { "Name", "Type", "DiscoveredDate" };
+            //advanceListView1.PropertiesForFiltering = new string[] { "Name" };
             advanceListView1.PropertiesToHide = new string[] { "Id" };
             advanceListView1.KeyProperty = "Id";
             advanceListView1.ContextMenuStrip = contextMenuStrip1;
