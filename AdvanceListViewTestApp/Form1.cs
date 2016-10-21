@@ -26,6 +26,7 @@ namespace AdvanceListViewTestApp
                 new Animal() { Id = 5, Name = "Gold Fish", Type = "Fish" }
             };
 
+            advanceListView1.DictionaryItems = null;
             advanceListView1.DictionaryItems = animals.ToDictionary(a => a.Id.ToString(), a => (object)a);
             //advanceListView1.PropertiesForFiltering = new string[] { "Name" };
             advanceListView1.PropertiesToHide = new string[] { "Id" };
