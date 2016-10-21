@@ -86,13 +86,14 @@ namespace AdvanceListView
             }
             set
             {
+                cbFilterBy_SelectedIndexChanged(null, null);
+
                 if (value == null || value.Count() == 0)
                 {
                     if (dataTable != null)
                         dataTable.Clear();
 
                     dgvItems.DataSource = null;
-
                     lblCount.Text = "No rows";
 
                     return;
