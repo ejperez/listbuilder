@@ -55,7 +55,7 @@
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.RowHeadersVisible = false;
             this.dgvItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvItems.Size = new System.Drawing.Size(379, 133);
+            this.dgvItems.Size = new System.Drawing.Size(343, 133);
             this.dgvItems.TabIndex = 3;
             this.dgvItems.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItems_CellEndEdit);
             // 
@@ -71,9 +71,12 @@
             // 
             // txtFilter
             // 
+            this.txtFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilter.Location = new System.Drawing.Point(38, 5);
+            this.txtFilter.MaximumSize = new System.Drawing.Size(151, 20);
             this.txtFilter.Name = "txtFilter";
-            this.txtFilter.Size = new System.Drawing.Size(163, 20);
+            this.txtFilter.Size = new System.Drawing.Size(127, 20);
             this.txtFilter.TabIndex = 1;
             this.txtFilter.TextChanged += new System.EventHandler(this.txtItemsFilter_TextChanged);
             // 
@@ -83,7 +86,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSelectedCount.Location = new System.Drawing.Point(165, 173);
             this.lblSelectedCount.Name = "lblSelectedCount";
-            this.lblSelectedCount.Size = new System.Drawing.Size(217, 18);
+            this.lblSelectedCount.Size = new System.Drawing.Size(181, 18);
             this.lblSelectedCount.TabIndex = 4;
             this.lblSelectedCount.Text = "(Nothing selected)";
             this.lblSelectedCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -113,7 +116,7 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(208, 3);
+            this.button3.Location = new System.Drawing.Point(172, 3);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(93, 23);
             this.button3.TabIndex = 7;
@@ -124,7 +127,7 @@
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(307, 3);
+            this.button4.Location = new System.Drawing.Point(271, 3);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 8;
@@ -145,7 +148,7 @@
             this.Controls.Add(this.dgvItems);
             this.Controls.Add(this.txtFilter);
             this.Name = "ListBuilder";
-            this.Size = new System.Drawing.Size(466, 306);
+            this.Size = new System.Drawing.Size(430, 306);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
