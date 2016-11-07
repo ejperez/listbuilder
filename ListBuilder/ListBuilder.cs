@@ -155,7 +155,7 @@ namespace ListBuilder
 
         private void txtItemsFilter_TextChanged(object sender, EventArgs e)
         {
-            if (dataTable.Rows.Count > 0 && propertiesForFiltering.Count() > 0)
+            if (dataTable.Rows.Count > 0 && propertiesForFiltering.Count() > 0 && !string.IsNullOrWhiteSpace(txtFilter.Text))
             {
                 var properties = propertiesForFiltering.ToArray();
                 string filter = string.Empty;
@@ -181,7 +181,7 @@ namespace ListBuilder
         private void button3_Click(object sender, EventArgs e)
         {
             if (dataTable != null)
-                dataTable.DefaultView.RowFilter = string.Format("Selected = True");
+                dataTable.DefaultView.RowFilter = string.Format("Selected = True");                
             txtFilter.Clear();
         }
 
@@ -207,14 +207,18 @@ namespace ListBuilder
                     selectedIds.Add((string)row[keyProperty]);
                 }
 
-                // Select filtered ids
-                for (int i = 0; i < dgvItems.Rows.Count; i++)
+                for (int i = 0; i < dataTable.Rows.Count; i++)
                 {
-                    if (selectedIds.Contains((string)dgvItems.Rows[i].Cells[keyProperty].Value))
+                    int keyPropertyIndex = dataTable.Columns[keyProperty].Ordinal;
+                    int selectedIndex = dataTable.Columns["Selected"].Ordinal;
+
+                    if (selectedIds.Contains((string)dataTable.Rows[i].ItemArray[keyPropertyIndex]))
                     {
-                        dgvItems.Rows[i].Cells["Selected"].Value = true;
+                        dataTable.Rows[i][selectedIndex] = true;
                     }
                 }
+
+                dataTable.AcceptChanges();
             }
 
             UpdateSelectedCountLabel();
@@ -238,13 +242,18 @@ namespace ListBuilder
                 }
 
                 // Select filtered ids
-                for (int i = 0; i < dgvItems.Rows.Count; i++)
+                for (int i = 0; i < dataTable.Rows.Count; i++)
                 {
-                    if (selectedIds.Contains((string)dgvItems.Rows[i].Cells[keyProperty].Value))
+                    int keyPropertyIndex = dataTable.Columns[keyProperty].Ordinal;
+                    int selectedIndex = dataTable.Columns["Selected"].Ordinal;
+
+                    if (selectedIds.Contains((string)dataTable.Rows[i].ItemArray[keyPropertyIndex]))
                     {
-                        dgvItems.Rows[i].Cells["Selected"].Value = false;
+                        dataTable.Rows[i][selectedIndex] = false;
                     }
                 }
+
+                dataTable.AcceptChanges();
             }
 
             UpdateSelectedCountLabel();
